@@ -1,1 +1,1 @@
-it's a .dotnet 6 project
+it's a dotnet 6 project
