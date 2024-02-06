@@ -38,20 +38,52 @@ public class OfficeService : IOffice
         var office = new Office
         {
             Name = createOfficeDTO.OfficeName,
-            // Add other properties as needed
         };
 
         _context.Offices.Add(office);
         await _context.SaveChangesAsync();
 
-        // Map the created office to OfficeDTO (you can use AutoMapper or manual mapping)
         var officeDTO = new OfficeDTO
         {
             OfficeId = office.Id,
             OfficeName = office.Name,
-            // Map other properties as needed
         };
 
         return officeDTO;
+    }
+
+    public async Task<OfficeDTO> UpdateOfficeAsync(UpdateOfficeDTO updateOfficeDTO)
+    {
+        var office = await _context.Offices.FindAsync(updateOfficeDTO.OfficeId);
+
+        if (office == null)
+        {
+            throw new InvalidOperationException("Office not found.");
+        }
+
+        office.Name = updateOfficeDTO.OfficeName;
+
+        await _context.SaveChangesAsync();
+
+        var officeDTO = new OfficeDTO
+        {
+            OfficeId = office.Id,
+            OfficeName = office.Name,
+        };
+
+        return officeDTO;
+    }
+
+    public async Task<OfficeDTO> GetOfficeByIdAsync(long officeId)
+    {
+        var officeData = await Task.FromResult((from o in _context.Offices
+                                                where o.Id == officeId
+                                                select new OfficeDTO()
+                                                {
+                                                    OfficeId = o.Id,
+                                                    OfficeName = o.Name
+                                                }).FirstOrDefault()) ?? throw new InvalidOperationException("Office not found.");
+
+        return officeData;
     }
 }

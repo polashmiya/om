@@ -27,11 +27,11 @@ namespace OM.DTOs
         public int OfficeId { get; set; }
         public string OfficeName { get; set; }
     }
-public class CreateOfficeDTO
-{
-    public string OfficeName { get; set; }
-    // Add other properties as needed
-}
+    public class CreateOfficeDTO
+    {
+        public string OfficeName { get; set; }
+        // Add other properties as needed
+    }
     public class ProjectDTO
     {
         public int ProjectId { get; set; }
@@ -39,6 +39,11 @@ public class CreateOfficeDTO
         public int? TeamMemberId { get; set; }
     }
 
+    public class UpdateOfficeDTO
+    {
+        public int OfficeId { get; set; }
+        public string OfficeName { get; set; }
+    }
 
 
 }

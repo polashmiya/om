@@ -30,7 +30,7 @@ namespace OM.Controllers
         }
 
         [HttpPost("CreateOffice")]
-        public async Task<IActionResult> CreateOffice([FromBody] CreateOfficeDTO createOfficeDTO)
+        public async Task<IActionResult> CreateOffice(CreateOfficeDTO createOfficeDTO)
         {
             try
             {
@@ -40,6 +40,38 @@ namespace OM.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPut("UpdateOffice")]
+        public async Task<IActionResult> UpdateOffice(UpdateOfficeDTO updateOfficeDTO)
+        {
+            try
+            {
+                var updatedOffice = await _officeService.UpdateOfficeAsync(updateOfficeDTO);
+                return Ok(updatedOffice);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("GetOfficeById")]
+
+        public async Task<IActionResult> GetOffice(long officeId)
+        {
+            try
+            {
+                var office = await _officeService.GetOfficeByIdAsync(officeId);
+                return Ok(office);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+
             }
         }
 
