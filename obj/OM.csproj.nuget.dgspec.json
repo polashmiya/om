@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj": {}
+    "C:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj": {}
   },
   "projects": {
-    "c:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj": {
+    "C:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj",
+        "projectUniqueName": "C:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj",
         "projectName": "OM",
-        "projectPath": "c:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj",
+        "projectPath": "C:\\Users\\88018\\Documents\\.Net Learning\\OM\\OM.csproj",
         "packagesPath": "C:\\Users\\88018\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\88018\\Documents\\.Net Learning\\OM\\obj\\",
+        "outputPath": "C:\\Users\\88018\\Documents\\.Net Learning\\OM\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
