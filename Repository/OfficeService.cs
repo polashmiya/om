@@ -16,16 +16,15 @@ public class OfficeService : IOffice
     {
         try
         {
-            var offices = await _context.Offices
-            .Select(o => new OfficeDTO { OfficeId = o.Id, OfficeName = o.Name }).ToListAsync();
+            var offices = await _context
+                .Offices.Select(o => new OfficeDTO { OfficeId = o.Id, OfficeName = o.Name })
+                .ToListAsync();
 
             return offices;
         }
         catch (System.Exception)
         {
-
             throw;
-
         }
     }
 
@@ -35,19 +34,12 @@ public class OfficeService : IOffice
         {
             throw new InvalidOperationException("Office with the same name already exists.");
         }
-        var office = new Office
-        {
-            Name = createOfficeDTO.OfficeName,
-        };
+        var office = new Office { Name = createOfficeDTO.OfficeName, };
 
         _context.Offices.Add(office);
         await _context.SaveChangesAsync();
 
-        var officeDTO = new OfficeDTO
-        {
-            OfficeId = office.Id,
-            OfficeName = office.Name,
-        };
+        var officeDTO = new OfficeDTO { OfficeId = office.Id, OfficeName = office.Name, };
 
         return officeDTO;
     }
@@ -64,25 +56,21 @@ public class OfficeService : IOffice
         office.Name = updateOfficeDTO.OfficeName;
 
         await _context.SaveChangesAsync();
-
-        var officeDTO = new OfficeDTO
-        {
-            OfficeId = office.Id,
-            OfficeName = office.Name,
-        };
+        var officeDTO = new OfficeDTO { OfficeId = office.Id, OfficeName = office.Name, };
 
         return officeDTO;
     }
 
     public async Task<OfficeDTO> GetOfficeByIdAsync(long officeId)
     {
-        var officeData = await Task.FromResult((from o in _context.Offices
-                                                where o.Id == officeId
-                                                select new OfficeDTO()
-                                                {
-                                                    OfficeId = o.Id,
-                                                    OfficeName = o.Name
-                                                }).FirstOrDefault()) ?? throw new InvalidOperationException("Office not found.");
+        var officeData =
+            await Task.FromResult(
+                (
+                    from o in _context.Offices
+                    where o.Id == officeId
+                    select new OfficeDTO() { OfficeId = o.Id, OfficeName = o.Name }
+                ).FirstOrDefault()
+            ) ?? throw new InvalidOperationException("Office not found.");
 
         return officeData;
     }
