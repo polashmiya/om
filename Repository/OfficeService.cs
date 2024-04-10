@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OM.DbContexts;
-using OM.DTOs;
+using OM.DTO;
 using OM.Models;
 
 public class OfficeService : IOffice

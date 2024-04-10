@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OM.DTOs;
+using OM.DTO;
 
 namespace OM.Controllers
 {

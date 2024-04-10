@@ -1,4 +1,4 @@
-using OM.DTOs;
+using OM.DTO;
 
 public interface IOffice
 {

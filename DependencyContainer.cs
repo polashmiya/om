@@ -6,14 +6,12 @@ public class DependencyContainer
     public static void ConfigureContainer(ContainerBuilder builder)
     {
         // Register Context with Autofac
-        builder.RegisterType<Context>()
-               .AsSelf()
-               .InstancePerLifetimeScope();
+        builder.RegisterType<Context>().AsSelf().InstancePerLifetimeScope();
 
         // Register OfficeService with Autofac
-        builder.RegisterType<OfficeService>()
-               .As<IOffice>()
-               .InstancePerLifetimeScope();
+        builder.RegisterType<OfficeService>().As<IOffice>().InstancePerLifetimeScope();
+        // Register Employee Service with Autofac
+        builder.RegisterType<EmployeeService>().As<IEmployee>().InstancePerLifetimeScope();
 
         // Additional registrations...
 
