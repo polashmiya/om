@@ -1,4 +1,5 @@
 using OM.DTO;
+using OM.EmployeeDTO;
 
 public interface IEmployee
 {
@@ -11,4 +12,6 @@ public interface IEmployee
     Task<List<CommonDDLDTO>> GetDepartmentDDL();
 
     Task<List<CommonDDLDTO>> GetReligionDDL();
+
+    Task<MessageHelper> CreateEmployee(EmployeeCreateUpdateDto employee);
 }

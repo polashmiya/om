@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using OM.DbContexts;
 using OM.DTO;
+using OM.EmployeeDTO;
+using OM.Models;
 
 public class EmployeeService : IEmployee
 {
@@ -9,6 +11,57 @@ public class EmployeeService : IEmployee
     public EmployeeService(Context context)
     {
         _context = context;
+    }
+
+    public async Task<MessageHelper> CreateEmployee(EmployeeCreateUpdateDto employee)
+    {
+        try
+        {
+            var newEmployee = new Employee
+            {
+                EmployeeId = employee.EmployeeId,
+                EmployeeName = employee.EmployeeName,
+                DepartmentId = employee.DepartmentId,
+                DepartmentName = employee.DepartmentName,
+                DesignationId = employee.DesignationId,
+                DesignationName = employee.DesignationName,
+                MobileNo = employee.MobileNo,
+                Emaill = employee.Email,
+                JoiningDate = employee.JoiningDate,
+                ConfirmationDate = employee.ConfirmationDate ,
+                EmployeeTypeId = employee.EmployeeTypeId,
+                EmployeeTypeName = employee.EmployeeTypeName,
+                OfficeId = employee.OfficeId,
+                OfficeName = employee.OfficeName,
+                ReligionId = employee.ReligionId,
+                ReligionName = employee.ReligionName,
+                GenderId = employee.GenderId,
+                GenderName = employee.GenderName,
+                BloodGroupId = employee.BloodGroupId,
+                BloodGroupName = employee.BloodGroupName,
+                DateOfBirth = employee.DateOfBirth ?? null,
+                OfficialContact = employee.OfficialContact,
+                Nid = employee.Nid,
+                PresentAddress = employee.PresentAddress,
+                PermanentAddress = employee.PermanentAddress,
+                SupervisorId = employee.SupervisorId,
+                LineManagerId = employee.LineManagerId,
+                IsUser = employee.IsUser,
+                IsMasterUser = employee.IsMasterUser,
+                IsAdmin = employee.IsAdmin
+            };
+            _context.Employees.Add(newEmployee);
+            await _context.SaveChangesAsync();
+            return new MessageHelper
+            {
+                Message = "Employee Created Successfully",
+                StatusCode = 200
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error : " + ex.Message);
+        }
     }
 
     public async Task<List<CommonDDLDTO>> GetBloodGroupDDL()

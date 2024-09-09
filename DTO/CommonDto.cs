@@ -16,12 +16,12 @@ namespace OM.DTO
     public class OfficeDTO
     {
         public int OfficeId { get; set; }
-        public string OfficeName { get; set; }
+        public string? OfficeName { get; set; }
     }
 
     public class CreateOfficeDTO
     {
-        public string OfficeName { get; set; }
+        public string? OfficeName { get; set; }
     }
 
     public class ProjectDTO
@@ -29,6 +29,12 @@ namespace OM.DTO
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public int? TeamMemberId { get; set; }
+    }
+
+    public class MessageHelper
+    {
+        public string? Message { get; set; }
+        public int StatusCode { get; set; }
     }
 
     public class UpdateOfficeDTO

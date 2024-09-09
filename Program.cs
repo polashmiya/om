@@ -26,3 +26,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+
+// scaffold
+// dotnet ef dbcontext scaffold "Server=POLASH-558442;Database=OfficeManagement;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -o Models

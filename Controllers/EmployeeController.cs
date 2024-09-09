@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OM.EmployeeDTO;
 
 namespace OM.Controllers
 {
@@ -76,6 +77,20 @@ namespace OM.Controllers
             {
                 var designationData = await _employeeService.GetDesignationDDL();
                 return Ok(designationData);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("CreateEmployee")]
+        public async Task<IActionResult> CreateEmployee(EmployeeCreateUpdateDto employee)
+        {
+            try
+            {
+                var message = await _employeeService.CreateEmployee(employee);
+                return Ok(message);
             }
             catch (Exception ex)
             {
