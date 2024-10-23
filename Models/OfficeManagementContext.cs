@@ -17,14 +17,19 @@ namespace OM.Models
         }
 
         public virtual DbSet<BloodGroup> BloodGroups { get; set; } = null!;
+        public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<Department> Departments { get; set; } = null!;
         public virtual DbSet<Designation> Designations { get; set; } = null!;
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Gender> Genders { get; set; } = null!;
+        public virtual DbSet<Item> Items { get; set; } = null!;
         public virtual DbSet<Manager> Managers { get; set; } = null!;
         public virtual DbSet<Office> Offices { get; set; } = null!;
         public virtual DbSet<Project> Projects { get; set; } = null!;
         public virtual DbSet<Religion> Religions { get; set; } = null!;
+        public virtual DbSet<Supplier> Suppliers { get; set; } = null!;
+        public virtual DbSet<Uom> Uoms { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -52,6 +57,30 @@ namespace OM.Models
                     .HasMaxLength(5)
                     .IsUnicode(false)
                     .HasColumnName("bloodGroupName");
+            });
+
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.ToTable("Customer");
+
+                entity.Property(e => e.CustomerId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("customerId");
+
+                entity.Property(e => e.CustomerAddress).HasColumnName("customerAddress");
+
+                entity.Property(e => e.CustomerMobileNo)
+                    .HasMaxLength(50)
+                    .HasColumnName("customerMobileNo");
+
+                entity.Property(e => e.CustomerName)
+                    .HasMaxLength(255)
+                    .HasColumnName("customerName");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasColumnName("isActive")
+                    .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<Department>(entity =>
@@ -214,6 +243,29 @@ namespace OM.Models
                     .HasColumnName("genderName");
             });
 
+            modelBuilder.Entity<Item>(entity =>
+            {
+                entity.HasKey(e => new { e.ItemId, e.IsActive });
+
+                entity.ToTable("item");
+
+                entity.Property(e => e.ItemId).HasColumnName("itemId");
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.ItemName).HasColumnName("itemName");
+
+                entity.Property(e => e.PurchasePrice).HasColumnName("purchasePrice");
+
+                entity.Property(e => e.SellingPrice).HasColumnName("sellingPrice");
+
+                entity.Property(e => e.UomId).HasColumnName("uomId");
+
+                entity.Property(e => e.UomName)
+                    .HasMaxLength(50)
+                    .HasColumnName("uomName");
+            });
+
             modelBuilder.Entity<Manager>(entity =>
             {
                 entity.ToTable("manager");
@@ -266,6 +318,75 @@ namespace OM.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("religionName");
+            });
+
+            modelBuilder.Entity<Supplier>(entity =>
+            {
+                entity.ToTable("Supplier");
+
+                entity.Property(e => e.SupplierId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("supplierId");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasColumnName("isActive")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.SupplierAddress).HasColumnName("supplierAddress");
+
+                entity.Property(e => e.SupplierMobileNo)
+                    .HasMaxLength(50)
+                    .HasColumnName("supplierMobileNo");
+
+                entity.Property(e => e.SupplierName).HasColumnName("supplierName");
+            });
+
+            modelBuilder.Entity<Uom>(entity =>
+            {
+                entity.ToTable("uom");
+
+                entity.Property(e => e.UomId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("uomId");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasColumnName("isActive")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.UomName)
+                    .HasMaxLength(50)
+                    .HasColumnName("uomName");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("user");
+
+                entity.Property(e => e.UserId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("userId");
+
+                entity.Property(e => e.EmailAddress)
+                    .HasMaxLength(50)
+                    .HasColumnName("emailAddress");
+
+                entity.Property(e => e.FullName)
+                    .HasMaxLength(100)
+                    .HasColumnName("fullName");
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.MobileNo)
+                    .HasMaxLength(50)
+                    .HasColumnName("mobileNo");
+
+                entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .HasColumnName("userName");
             });
 
             OnModelCreatingPartial(modelBuilder);
